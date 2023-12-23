@@ -7,7 +7,7 @@ log_path_file="/home/admin/logs/stakingStatus.log"
 # You *MUST* update this AWS SNS ARN variable.
 sns_arn="arn:aws:sns:us-east-2:556767245239:MyVaultReward"
 
-# You *MUST* make sure you have the correct AWS Region.
+# You *MUST* make sure you have the correct AWS Region. You can see the region in the ARN above.
 aws_region="us-east-2"
 
 # Change if you wish
