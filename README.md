@@ -17,9 +17,5 @@ arn:aws:sns:us-east-2:556767245239:MyVaultReward
 
 In this case, your two variable updates will look like this:
 
-/# You *MUST* update this AWS SNS ARN variable.
 sns_arn="arn:aws:sns:us-east-2:556767245239:MyVaultReward"
-
-/# You *MUST* make sure you have the correct AWS Region.
 aws_region="us-east-2"
-
