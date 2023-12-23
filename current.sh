@@ -11,7 +11,7 @@ sns_arn="arn:aws:sns:us-east-2:556767245239:MyVaultReward"
 aws_region="us-east-2"
 
 # Change if you wish
-error_message="ERROR staking status is false"
+error_message="ERROR staking vault not running correctly"
 
 ## Check the staking status
 
