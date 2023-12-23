@@ -21,7 +21,8 @@ readarray -t arr < <(/home/admin/divi-3.0.0/bin/divi-cli getstakingstatus | jq -
 # Check the output for the statking status
 if [ "${arr[6]}" == "false" ]; then
     # There is an issue -> send status to the log file and send an AWS SNS message
-    echo "Staking status is ${arr[6]}"  echo "$current_date $error_message - validtime: ${arr[0]}, haveconnections: ${arr[1]}, walletunlocked: ${arr[2]}, mintablecoins: ${arr[3]}, enoughcoins: ${arr[4]}, mnsync: ${arr[5]}, staking status: ${arr[6]}" >> $log_path_file
+    echo "Staking status is ${arr[6]}"
+    echo "$current_date $error_message - validtime: ${arr[0]}, haveconnections: ${arr[1]}, walletunlocked: ${arr[2]}, mintablecoins: ${arr[3]}, enoughcoins: ${arr[4]}, mnsync: ${arr[5]}, staking status: ${arr[6]}" >> $log_path_file
     aws sns publish --topic-arn $sns_arn --message "$current_date $error_message - validtime: ${arr[0]}, haveconnections: ${arr[1]}, walletunlocked: ${arr[2]}, mintablecoins: ${arr[3]}, enoughcoins: ${arr[4]}, mnsync: ${arr[5]}, staking status: ${arr[6]}" --region $aws_region
 else
     # Staking status is okay
