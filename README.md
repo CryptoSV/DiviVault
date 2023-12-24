@@ -3,6 +3,7 @@
 Scripts used with the Divi cold vault for monitoring and notifications.
 
 Place all .sh script files in: /home/admin/scripts
+
 Change the access mode of all .sh scripts by running: chmod +x [file]
 
 # Instructions for the current.sh script:
