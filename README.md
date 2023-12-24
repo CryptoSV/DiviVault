@@ -2,6 +2,7 @@
 
 Scripts used with the Divi cold vault for monitoring and notifications.
 
+Place all .sh script files in: /home/admin/scripts
 
 # Instructions for the current.sh script:
 
