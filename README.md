@@ -36,17 +36,19 @@ aws_region="us-east-2"
 
 # Instructions for the allVaultRewards.sh script:
 
-This script requires the properNamed.sh script.  that checks the Divi staking status. If there is an issue, it will add it to the log file and send an AWS SNS alert message.
+This script requires the properNamed.sh script.
+
+This script looks for new vault rewards and sends a notification to AWS SNS with all the details of the reward.
 
 To make sure it runs every minute, run:
 
 sudo crontab -e (If asked, select Nano.) Add this line to the bottom:
 
-[astrick] [astrick] [astrick] [astrick] [astrick] /home/admin/scripts/current.sh
+[astrick] [astrick] [astrick] [astrick] [astrick] /home/admin/scripts/allVaultRewards.sh
 
 Yes, there will be five astricks, each seperated by a space.
 
-There are two variables in the current.sh script that MUST be updated for this script to work.
+There are two variables in the AllVaultRewards.sh script that MUST be updated for this script to work.
 
 You'll need to update the sns_arn variable with your AWS SNS topic ARN. You can find it in the AWS console under SNS / Topics / [your DIVI vault topic].
 You'll also need to update the aws_region variable to the correct AWS region. You can find the region in the ARN.
