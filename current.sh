@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This scripts checks the current staking status of the vault and reports if it is having any issues by sending a notifications to AWS SNS.
+
 ## Setup variables
 current_date=$(date)
 log_path_file="/home/admin/logs/stakingStatus.log"
