@@ -7,8 +7,6 @@ Scripts used with the Divi cold vault for monitoring and notifications.
 
 This is a standalone script that checks the Divi staking status. If there is an issue, it will add it to the log file and send an AWS SNS alert message.
 
-Place this file in /home/admin/scripts
-
 To make sure it runs every minute, run:
 
 sudo crontab -e
