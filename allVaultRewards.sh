@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This scripts looks for new vault rewards and sends a notification to AWS SNS with all the details of the reward.
+
 ## Variables
 
 # You *MUST* update this AWS SNS ARN variable.
