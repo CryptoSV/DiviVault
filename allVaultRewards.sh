@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # This scripts looks for new vault rewards and sends a notification to AWS SNS with all the details of the reward.
+# This script requires the properNamed.sh script.
 
 ## Variables
 
