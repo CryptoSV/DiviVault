@@ -15,7 +15,9 @@ sudo crontab -e
 (If asked, select Nano.)
 Add this line to the bottom:
 
-* * * * * /home/admin/scripts/current.sh
+[astrick] [astrick] [astrick] [astrick] [astrick] /home/admin/scripts/current.sh
+
+Yes, there will be five astricks, each seperated by a space.
 
 There *are* two variables in the current.sh script that *MUST* be updated for this script to work.
 
