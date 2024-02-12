@@ -7,7 +7,7 @@ integrations:
           integration_user: admin
           working_dir: /home/admin
           commands:
-            - run: '/home/admin/scripts/stakeStatus.sh'
+            - run: 'sudo -u admin /home/admin/scripts/stakeStatus.sh'
               split: horizontal
               split_by: \s+
               set_header: [validtime,haveconnections,walletunlocked,mintablecoins,enoughcoins,mnsync,stakingstatus]
