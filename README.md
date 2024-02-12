@@ -16,7 +16,7 @@ This is a standalone script that checks the Divi staking status. If there is an 
 
 To make sure it runs every minute, run:
 
-sudo crontab -e
+crontab -e
 (If asked, select Nano.)
 Add this line to the bottom:
 
@@ -45,7 +45,7 @@ This script looks for new vault rewards and sends a notification to AWS SNS with
 
 To make sure it runs every minute, run:
 
-sudo crontab -e (If asked, select Nano.) Add this line to the bottom:
+crontab -e (If asked, select Nano.) Add this line to the bottom:
 
 [astrick] [astrick] [astrick] [astrick] [astrick] /home/admin/scripts/allVaultRewards.sh
 
