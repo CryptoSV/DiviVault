@@ -1,0 +1,3 @@
+logs:
+  - name: stakingStatus.log
+    file: /home/admin/logs/stakingStatus.log

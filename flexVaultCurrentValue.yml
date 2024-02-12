@@ -1,0 +1,13 @@
+integrations:
+  - name: nri-flex    
+    config:
+      name: DiviCurrentVault
+      apis:
+        - name: VaultValue
+          integration_user: admin
+          working_dir: /home/admin
+          commands:
+            - run: '/home/admin/scripts/getCurrentVaultValue.sh'
+              split: horizontal
+              split_by: \s+
+              set_header: [current,value]
