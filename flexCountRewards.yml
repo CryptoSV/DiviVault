@@ -7,7 +7,7 @@ integrations:
           integration_user: admin
           working_dir: /home/admin
           commands:
-            - run: '/home/admin/scripts/countMyRewards.sh'
+            - run: 'sudo -u admin /home/admin/scripts/countMyRewards.sh'
               split: horizontal
               split_by: \s+
               set_header: [totalrewards,previousmonth,currentmonth,twentyfour,ninty,yesterday,today,lastconfirmation,hours,minutes]
