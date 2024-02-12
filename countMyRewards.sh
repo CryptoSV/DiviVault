@@ -1,87 +1,70 @@
 #!/bin/bash
 
-# Log file path
+# This script analyzes vault rewards and reports statistics. It's used with New Relic for monitoring.
+
+# Configuration
 log_file="/home/admin/logs/allVaultRewards.log"
+divi_cli="/home/admin/divi-3.0.0/bin/divi-cli"
 
 # Current date and time in epoch format
 current_time=$(date +"%s")
 
-# Calculate the timestamp for the start of today in epoch format
+# Calculate timestamps for various intervals
 start_of_today=$(date -d 'today 00:00:00' +"%s")
-
-# Calculate the timestamp for 24 hours ago in epoch format
 twenty_four_hours_ago=$(date -d '24 hours ago' +"%s")
-
-# Calculate the timestamp for 90 days ago in epoch format
-ninty_days_ago=$(date -d '2160 hours ago' +"%s")
-
-# Count the number of logs between now and 90 days ago
-count_ninty_days=$(awk -v start="$ninty_days_ago" -v end="$current_time" -F, \
-                        '$4 >= start && $4 <= end {count++} END {print count}' "$log_file")
-
-# Calculate the timestamp for yesterday at the same time in epoch format
+ninety_days_ago=$(date -d '90 days ago' +"%s") # Corrected spelling
 yesterday_same_time=$(date -d 'yesterday 00:00:00' +"%s")
 
-# Count the number of logs between the two timestamps
-count_last_24_hours=$(awk -v start="$twenty_four_hours_ago" -v end="$current_time" -F, \
-                      '$4 >= start && $4 <= end {count++} END {print count}' "$log_file")
+# Function to count logs in a given time range
+count_logs() {
+    awk -v start="$1" -v end="$2" -F, '$4 >= start && $4 <= end {count++} END {print count+0}' "$log_file"
+}
 
-# Count the number of logs that occurred today
-count_today=$(awk -v start="$start_of_today" -v end="$current_time" -F, \
-              '$4 >= start && $4 <= end {count++} END {print count}' "$log_file")
+# Use the function to count logs for specific intervals
+count_ninety_days=$(count_logs "$ninety_days_ago" "$current_time")
+count_last_24_hours=$(count_logs "$twenty_four_hours_ago" "$current_time")
+count_today=$(count_logs "$start_of_today" "$current_time")
+count_yesterday=$(count_logs "$yesterday_same_time" "$start_of_today")
 
-# Count the number of logs that occurred yesterday at the same time
-count_yesterday=$(awk -v start="$yesterday_same_time" -v end="$start_of_today" -F, \
-                  '$4 >= start && $4 < end {count++} END {print count}' "$log_file")
+# Total number of rewards
+numRewards=$(wc -l "$log_file" | awk '{print $1}')
 
-numRewards=$(wc -l /home/admin/logs/allVaultRewards.log | awk '{print $1}')
-
+# Extract month counts
 current_month=$(date +'%m')
 previous_month=$(date -d 'last month' +'%m')
 
-# Generate JSON data using divi-cli listtransactions
-json_data=$(/home/admin/divi-3.0.0/bin/divi-cli listtransactions)
-
-# Use jq to extract the last item's confirmations
-last_confirmations=$(echo "$json_data" | jq '.[-1].confirmations')
-
-# Initialize an associative array to store the counts for each month
+# Initialize associative array for monthly counts
 declare -A counts
 
 # Read the log file line by line
 while IFS= read -r line; do
-    # Extract the month from the log entry
-    month=$(echo "$line" | awk '{print $1}' | cut -d'-' -f2)
-
-    # Increment the count for the corresponding month in the array
+    month=$(echo "$line" | cut -d'-' -f2)
     ((counts[$month]++))
 done < "$log_file"
 
-# Store the counts for the current and previous months
-current_counts=${counts[$current_month]}
-previous_counts=${counts[$previous_month]}
+# Retrieve counts for current and previous months
+current_counts=${counts[$current_month]:-0}
+previous_counts=${counts[$previous_month]:-0}
 
-## This section figures out the amount of hours and minutes that have passed since the last reward
-# Extract the epoch date from the last line of the log file
-last_epoch_date=$(tail -n 1 "$log_file" | awk -F ', ' '{print $NF}')
+# Extract confirmations from the last transaction
+last_confirmations=$("$divi_cli" listtransactions | jq '.[-1].confirmations')
 
-# Get the current epoch date
-current_epoch_date=$(date +%s)
-
-# Calculate the difference in seconds
-seconds_passed=$((current_epoch_date - last_epoch_date))
-
-# Calculate hours and minutes
+# Calculate the time since the last reward
+last_epoch_date=$(awk -F ', ' '{print $NF}' "$log_file" | tail -n 1)
+seconds_passed=$((current_time - last_epoch_date))
 hours=$((seconds_passed / 3600))
-minutes=$(( (seconds_passed % 3600) / 60 ))
+minutes=$((seconds_passed % 3600 / 60))
 
-# Check for NULL and replace with 0
-if [ -z "$current_counts" ]; then current_counts=0; fi
-if [ -z "$previous_counts" ]; then previous_counts=0; fi
-if [ -z "$count_ninty_days" ]; then count_ninty_days=0; fi
-if [ -z "$count_last_24_hours" ]; then count_last_24_hours=0; fi
-if [ -z "$count_today" ]; then count_today=0; fi
-if [ -z "$count_yesterday" ]; then count_yesterday=0; fi
-if [ -z "$last_confirmations" ]; then last_confirmations=0; fi
+# Output stats for New Relic integration - comment if testing
+echo "$numRewards $previous_counts $current_counts $count_last_24_hours $count_ninety_days $count_yesterday $count_today $last_confirmations $hours $minutes"
 
-echo "$numRewards $previous_counts $current_counts $count_last_24_hours $count_ninty_days $count_yesterday $count_today $last_confirmations $hours $minutes"
+# Reporting - uncomment for testing only. The New Relic integration won't work with these uncommented.
+#echo "Total Rewards: $numRewards"
+#echo "Rewards in the Last 90 Days: $count_ninety_days"
+#echo "Rewards in the Last 24 Hours: $count_last_24_hours"
+#echo "Rewards Today: $count_today"
+#echo "Rewards Yesterday: $count_yesterday"
+#echo "Current Month's Rewards: $current_counts"
+#echo "Previous Month's Rewards: $previous_counts"
+#echo "Last Confirmation Count: ${last_confirmations:-0}"
+#echo "Time Since Last Reward: ${hours}h ${minutes}m"
