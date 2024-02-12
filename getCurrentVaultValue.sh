@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script gets the current staked value, formats it, and works with New Relic.
+
 # Run the command and capture the JSON output
 json_output=$(/home/admin/divi-3.0.0/bin/divi-cli getcoinavailability true)
 
