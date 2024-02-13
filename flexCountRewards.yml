@@ -1,5 +1,5 @@
 integrations:
-  - name: nri-flex    
+  - name: nri-flex
     config:
       name: DiviVaultRewards
       apis:
