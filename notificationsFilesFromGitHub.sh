@@ -13,6 +13,7 @@ read -n 1 -s -r -p "Press spacebar to continue..."
 
 wget -P /home/admin/scripts/notification https://raw.githubusercontent.com/CryptoSV/DiviVault/main/current.sh
 wget -P /home/admin/scripts/notification https://raw.githubusercontent.com/CryptoSV/DiviVault/main/allVaultRewards.sh
+
 chmod +x /home/admin/scripts/notification/*
 
 echo ""
