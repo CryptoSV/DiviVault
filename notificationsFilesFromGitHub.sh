@@ -1,7 +1,24 @@
 #!/bin/bash
 
+# Scripts:
+echo "This section:"
+echo " -Asks you for your AWS SNS ARN and Chainz CryptoID key"
+echo " -Downloads two notification scripts"
+echo "  Location: /home/admin/scripts"
+echo "  1. current.sh"
+echo "  2. all.sh"
+echo " -Updates both file permissions"
+echo " -Updates the files with your AWS SNS ARN, Region, and CryptoID key"
+read -n 1 -s -r -p "Press spacebar to continue..."
+
+wget -P /home/admin/scripts/notification https://raw.githubusercontent.com/CryptoSV/DiviVault/main/current.sh
+wget -P /home/admin/scripts/notification https://raw.githubusercontent.com/CryptoSV/DiviVault/main/all???????.sh
+chmod +x /home/admin/scripts/notification/*
+
+echo ""
+
 # Ask the user for the full ARN
-read -p "Enter the full ARN (e.g., arn:aws:sns:us-west-2:992382426593:VaultNotification): " full_arn
+read -p "Enter the full AWS SNS ARN (e.g., arn:aws:sns:us-west-2:992382426593:VaultNotification): " full_arn
 
 # Use cut to extract the region
 # ARN format: arn:partition:service:region:account-id:resource
@@ -12,8 +29,8 @@ read -p "Enter your Chainz CryptoID key: " cryptoID_key
 
 
 # The path to the auto.sh file that needs to be updated
-script_all="all.sh"
-script_cur="cur.sh"
+script_all="/home/admin/scripts/notification/all.sh"
+script_cur="/home/admin/scripts/notification/cur.sh"
 
 # Check if all.sh exists
 if [ ! -f "$script_all" ]; then
