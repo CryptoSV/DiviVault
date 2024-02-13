@@ -8,7 +8,9 @@ read -p "Enter the full ARN (e.g., arn:aws:sns:us-west-2:992382426593:VaultNotif
 region=$(echo "$full_arn" | cut -d':' -f4)
 
 # Ask the user for the CryptoID
-read -p "Enter your CryptoID key: " cryptoID_key
+read -p "Enter your Chainz CryptoID key: " cryptoID_key
+
+# cryptoid_key="[Your CryptoID key]"  # Update with your Chainz CryptoID key
 
 # The path to the auto.sh file that needs to be updated
 script_all="all.sh"
@@ -26,10 +28,14 @@ if [ ! -f "$script_cur" ]; then
     exit 1
 fi
 
-
+# All needs SNS ARN, Region, and CryptoID key
 # Use sed to replace [Your SNS ARN] with the user's full_arn in script_all.sh
 sed -i "s|\[Your SNS ARN\]|$full_arn|g" "$script_all"
 
+# Use sed to replace [Your AWS Region] with the user's region in script_all.sh
+sed -i "s|\[Your AWS Region\]|$region|g" "$script_all"
+
+######## KEY HERE
 # Use sed to replace [Your AWS Region] with the user's region in script_all.sh
 sed -i "s|\[Your AWS Region\]|$region|g" "$script_all"
 
