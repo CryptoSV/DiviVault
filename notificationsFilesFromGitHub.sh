@@ -11,8 +11,8 @@ echo " -Updates both file permissions"
 echo " -Updates the files with your AWS SNS ARN, Region, and CryptoID key"
 read -n 1 -s -r -p "Press spacebar to continue..."
 
-wget -P /home/admin/scripts/notification https://raw.githubusercontent.com/CryptoSV/DiviVault/main/current.sh
-wget -P /home/admin/scripts/notification https://raw.githubusercontent.com/CryptoSV/DiviVault/main/allVaultRewards.sh
+wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault/main/current.sh
+wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault/main/allVaultRewards.sh
 
 chmod +x /home/admin/scripts/notification/*
 
@@ -30,8 +30,8 @@ read -p "Enter your Chainz CryptoID key: " cryptoID_key
 
 
 # The path to the auto.sh file that needs to be updated
-script_all="/home/admin/scripts/notification/allVaultRewards.sh"
-script_cur="/home/admin/scripts/notification/current.sh"
+script_all="/home/admin/scripts/allVaultRewards.sh"
+script_cur="/home/admin/scripts/current.sh"
 
 # Check if all.sh exists
 if [ ! -f "$script_all" ]; then
