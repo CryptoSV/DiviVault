@@ -10,7 +10,6 @@ region=$(echo "$full_arn" | cut -d':' -f4)
 # Ask the user for the CryptoID
 read -p "Enter your CryptoID key: " cryptoID_key
 
-
 # The path to the auto.sh file that needs to be updated
 script_all="all.sh"
 script_cur="cur.sh"
@@ -36,7 +35,7 @@ sed -i "s|\[Your AWS Region\]|$region|g" "$script_all"
 
 echo "script_all.sh has been updated with your ARN and region."
 
-
+# Cur needs SNS ARN and Region only
 # Use sed to replace [Your SNS ARN] with the user's full_arn in script_all.sh
 sed -i "s|\[Your SNS ARN\]|$full_arn|g" "$script_cur"
 
