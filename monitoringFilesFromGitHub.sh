@@ -11,7 +11,7 @@ echo "  3. nicenumber.sh"
 echo "  4. stakeStatus.sh"
 echo " -Updates their permissions"
 echo " -Sets up a log file"
-read -n 1 -s -r -p "Press spacebar to continue..."
+read -n 1 -s -r -p "Press the spacebar to continue. Or, Control-c to exit."
 
 wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault/main/countMyRewards.sh
 wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault/main/getCurrentVaultValue.sh
@@ -28,7 +28,7 @@ echo " -Downloads two logging files used with New Relic"
 echo "  Location: /etc/newrelic-infra/logging.d"
 echo "  1. logging.yml"
 echo "  2. stakingStatus.yml"
-read -n 1 -s -r -p "Press spacebar to continue..."
+read -n 1 -s -r -p "Press the spacebar to continue. Or, Control-c to exit."
 
 sudo mv /etc/newrelic-infra/logging.d/logging.yml /etc/newrelic-infra/logging.d/logging.yml.example
 sudo wget -P /etc/newrelic-infra/logging.d https://raw.githubusercontent.com/CryptoSV/DiviVault/main/logging.yml
@@ -42,7 +42,7 @@ echo "  Location: /etc/newrelic-infra/integrations.d"
 echo "  1. flexCountCountRewards.yml"
 echo "  2. flexStakingStatus.yml"
 echo "  3. flexVaultCurrentValue.yml"
-read -n 1 -s -r -p "Press spacebar to continue..."
+read -n 1 -s -r -p "Press the spacebar to continue. Or, Control-c to exit."
 
 sudo wget -P /etc/newrelic-infra/integrations.d https://raw.githubusercontent.com/CryptoSV/DiviVault/main/flexCountRewards.yml
 sudo wget -P /etc/newrelic-infra/integrations.d https://raw.githubusercontent.com/CryptoSV/DiviVault/main/flexStakingStatus.yml
