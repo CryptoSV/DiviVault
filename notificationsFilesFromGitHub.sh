@@ -9,7 +9,7 @@ echo "  1. current.sh"
 echo "  2. allVaultRewards.sh"
 echo " -Updates both file permissions"
 echo " -Updates the files with your AWS SNS ARN, Region, and CryptoID key"
-read -n 1 -s -r -p "Press spacebar to continue..."
+read -n 1 -s -r -p "Press the spacebar to continue. Or, Control-c to exit."
 
 wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault/main/current.sh
 wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault/main/allVaultRewards.sh
