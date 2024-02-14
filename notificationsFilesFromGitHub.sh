@@ -46,23 +46,21 @@ if [ ! -f "$script_cur" ]; then
 fi
 
 
-# All needs SNS ARN, Region, and CryptoID key
 # Use sed to replace [Your SNS ARN] with the user's full_arn in script_all.sh
 sed -i "s|\[Your SNS ARN\]|$full_arn|g" "$script_all"
 
 # Use sed to replace [Your AWS Region] with the user's region in script_all.sh
 sed -i "s|\[Your AWS Region\]|$region|g" "$script_all"
 
-# Use sed to replace [Your AWS Region] with the user's region in script_all.sh
+# Use sed to replace [Your CryptoID key] with the user's region in script_all.sh
 sed -i "s|\[Your CryptoID key\]|$cryptoID_key|g" "$script_all"
 
-echo "script_all.sh has been updated with your SNS ARN, region, and CryptoID key."
+echo "allVaultRewards.sh has been updated with your SNS ARN, region, and CryptoID key."
 
-# Cur needs SNS ARN and Region only
 # Use sed to replace [Your SNS ARN] with the user's full_arn in script_all.sh
 sed -i "s|\[Your SNS ARN\]|$full_arn|g" "$script_cur"
 
 # Use sed to replace [Your AWS Region] with the user's region in script_all.sh
 sed -i "s|\[Your AWS Region\]|$region|g" "$script_cur"
 
-echo "script_cur.sh has been updated with your ARN and region."
+echo "current.sh has been updated with your SNS ARN and region."
