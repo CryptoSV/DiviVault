@@ -1,0 +1,2 @@
+* * * * * admin /bin/sh /home/admin/scripts/current.sh
+* * * * * admin /bin/sh /home/admin/scripts/allVaultRewards.sh
