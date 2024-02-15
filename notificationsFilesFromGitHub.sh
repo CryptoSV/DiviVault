@@ -2,7 +2,7 @@
 
 # Scripts:
 echo "This script:"
-echo " -Creates two directories called scripts and logs
+echo " -Creates two directories called scripts and logs"
 echo " -Downloads two notification scripts"
 echo "  Location: /home/admin/scripts"
 echo "  1. current.sh"
