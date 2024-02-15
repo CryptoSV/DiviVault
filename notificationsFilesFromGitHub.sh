@@ -1,16 +1,20 @@
 #!/bin/bash
 
 # Scripts:
-echo "This section:"
-echo " -Asks you for your AWS SNS ARN and Chainz CryptoID key"
+echo "This script:"
+echo " -Creates two directories called scripts and logs
 echo " -Downloads two notification scripts"
 echo "  Location: /home/admin/scripts"
 echo "  1. current.sh"
 echo "  2. allVaultRewards.sh"
 echo " -Updates both file permissions"
-echo " -Updates the files with your AWS SNS ARN, Region, and CryptoID key"
+echo " -Asks you for your AWS SNS ARN and Chainz CryptoID key"
+echo " -Updates the files with your AWS SNS ARN, Region (found in the ARN), and CryptoID key"
 echo " -Sets up crontab (scheduler) to run the two scripts every minute"
 read -n 1 -s -r -p "Press the spacebar to continue. Or, Control-c to exit."
+
+mkdir /home/admin/scripts
+mkdir /home/admin/logs
 
 wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault/main/current.sh
 wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault/main/allVaultRewards.sh
@@ -31,17 +35,17 @@ region=$(echo "$full_arn" | cut -d':' -f4)
 read -p "Enter your Chainz CryptoID key: " cryptoID_key
 
 
-# The path to the auto.sh file that needs to be updated
+# The path to the scripts files that needs to be updated
 script_all="/home/admin/scripts/allVaultRewards.sh"
 script_cur="/home/admin/scripts/current.sh"
 
-# Check if all.sh exists
+# Check if script_all.sh exists
 if [ ! -f "$script_all" ]; then
     echo "Error: $script_all does not exist."
     exit 1
 fi
 
-# Check if cur.sh exists
+# Check if script_cur.sh exists
 if [ ! -f "$script_cur" ]; then
     echo "Error: $script_cur does not exist."
     exit 1
