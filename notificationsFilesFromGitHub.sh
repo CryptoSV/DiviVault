@@ -9,6 +9,7 @@ echo "  1. current.sh"
 echo "  2. allVaultRewards.sh"
 echo " -Updates both file permissions"
 echo " -Updates the files with your AWS SNS ARN, Region, and CryptoID key"
+echo " -Sets up crontab (scheduler) to run the two scripts every minute"
 read -n 1 -s -r -p "Press the spacebar to continue. Or, Control-c to exit."
 
 wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault/main/current.sh
@@ -65,3 +66,7 @@ sed -i "s|\[Your SNS ARN\]|$full_arn|g" "$script_cur"
 sed -i "s|\[Your AWS Region\]|$region|g" "$script_cur"
 
 echo "current.sh has been updated with your SNS ARN and region."
+
+echo "Updating crontab to run the current.sh and AllVaultRewards.sh scripts every minute."
+
+sudo wget -P /etc/cron.d https://raw.githubusercontent.com/CryptoSV/DiviVault/main/per_minute
