@@ -22,7 +22,7 @@ Add this line to the bottom:
 
 [astrick] [astrick] [astrick] [astrick] [astrick] /home/admin/scripts/current.sh
 
-Yes, there will be five astricks, each separated by a space.
+Yes, there will be five astricks, each separated by a space. Save and exit Nano using Control+X, then answer Y, then enter.
 
 There *are* two variables in the current.sh script that *MUST* be updated for this script to work.
 
@@ -49,7 +49,7 @@ crontab -e (If asked, select Nano.) Add this line to the bottom:
 
 [astrick] [astrick] [astrick] [astrick] [astrick] /home/admin/scripts/allVaultRewards.sh
 
-Yes, there will be five astricks, each separated by a space.
+Yes, there will be five astricks, each separated by a space. Save and exit Nano using Control+X, then answer Y, then enter.
 
 There *are* three variables in the allVaultRewards.sh script that MUST be updated for this script to work.
 
