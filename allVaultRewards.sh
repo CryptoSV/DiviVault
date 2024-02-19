@@ -61,7 +61,7 @@ while read -r line; do
         suffix=$(get_number_suffix "$numRewards")
         publish_to_sns "${numRewards}${suffix} vault reward of ${amount} at: ${time_formatted} for ${dPrice}"
     fi
-done < <(echo "$output" | jq -c '.[] | select(.category=="stake_reward" and .confirmations > 0)')
+done < <(echo "$output" | jq -c '.[] | select((.category=="stake_reward" or .category=="lottery") and .confirmations > 0)')
 
 # Output the total number of new rewards found
 echo "Total new rewards found: $reward_count"
