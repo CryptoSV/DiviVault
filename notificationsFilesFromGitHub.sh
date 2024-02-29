@@ -8,10 +8,10 @@ echo "  Location: /home/admin/scripts"
 echo "  1. current.sh"
 echo "  2. allVaultRewards.sh"
 echo " -Updates both file permissions"
+echo " -Sets up a log file"
 echo " -Asks you for your AWS SNS ARN and Chainz CryptoID key"
 echo " -Updates the files with your AWS SNS ARN, Region (found in the ARN), and CryptoID key"
 echo " -Sets up crontab (scheduler) to run the two scripts every minute"
-echo " -Sets up a log file"
 read -n 1 -s -r -p "Press the spacebar to continue. Or, Control-c to exit."
 
 mkdir /home/admin/scripts
