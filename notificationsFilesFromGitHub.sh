@@ -11,6 +11,7 @@ echo " -Updates both file permissions"
 echo " -Asks you for your AWS SNS ARN and Chainz CryptoID key"
 echo " -Updates the files with your AWS SNS ARN, Region (found in the ARN), and CryptoID key"
 echo " -Sets up crontab (scheduler) to run the two scripts every minute"
+echo " -Sets up a log file"
 read -n 1 -s -r -p "Press the spacebar to continue. Or, Control-c to exit."
 
 mkdir /home/admin/scripts
@@ -21,6 +22,7 @@ wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault
 
 chmod +x /home/admin/scripts/allVaultRewards.sh
 chmod +x /home/admin/scripts/current.sh
+touch /home/admin/logs/stakingStatus.log
 
 echo ""
 
