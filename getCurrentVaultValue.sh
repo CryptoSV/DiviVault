@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# This script checks the last transaction from the listtransactions command, checks to make sure
-#  it's either a stake_reward or lottery, and if it has confirmations > waitForConfirmations. If so,
-#  then it gets the current staked value, formats it, and outputs it to work with the
-#  New Relic integrations.d file: flexVaultCurrentValue.yml
+# This script checks the last transaction from the listtransactions command and checks to make sure
+#  confirmations > waitForConfirmations. If so, then it gets the current staked value, formats it,
+#  and outputs it to work with the New Relic integrations.d file: flexVaultCurrentValue.yml
 
 # Change this if the getcoinavailability command returns a number that is lower than it should be. You'll see this if
 #  the New Relic History chart has drops that spike down. This happens while the stake_reward or lottery is validated.
