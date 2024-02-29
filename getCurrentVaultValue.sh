@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This scripts parses the last "stake_reward" entry from listtransactions and checks the confirmations. If they are greater than 20 (about 20 minutes), then get current coin availabile and report it to New Relic.
+# This scripts parses the last "stake_reward" entry from listtransactions and checks the confirmations. If they are greater than 20 (about 20 minutes), then get current coin availability and report it to New Relic.
 
 # Get the JSON output from this command
 output=$(/home/admin/divi-3.0.0/bin/divi-cli listtransactions)
