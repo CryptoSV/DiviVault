@@ -19,12 +19,11 @@ last_index=$(( ${#entries[@]} - 1 ))
 # Get the last entry from the array
 last_entry=${entries[$last_index]}
 
-# Extract category and confirmations from the last entry
-category=$(echo "$last_entry" | jq -r '.category')
+# Extract confirmations from the last entry
 confirmations=$(echo "$last_entry" | jq -r '.confirmations')
 
-# Check if category is "stake_reward" or "lottery" and confirmations are greater than waitForConfirmations
-if [[ "$category" == "stake_reward" || "$category" == "lottery" ]] && (( confirmations > $waitForConfirmations )); then
+# Check if confirmations are greater than waitForConfirmations
+if (( confirmations > $waitForConfirmations )); then
     # Run the command and capture the JSON output
     json_output=$(/home/admin/divi-3.0.0/bin/divi-cli getcoinavailability true)
 
