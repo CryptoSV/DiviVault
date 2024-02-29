@@ -10,7 +10,7 @@ echo "  2. getCurrentVaultValue.sh"
 echo "  3. nicenumber.sh"
 echo "  4. stakeStatus.sh"
 echo " -Updates their permissions"
-echo " -Sets up a log file"
+echo " -Sets up two log files"
 read -n 1 -s -r -p "Press the spacebar to continue. Or, Control-c to exit."
 
 wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault/main/countMyRewards.sh
@@ -19,6 +19,7 @@ wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault
 wget -P /home/admin/scripts https://raw.githubusercontent.com/CryptoSV/DiviVault/main/stakeStatus.sh
 chmod +x /home/admin/scripts/*
 touch /home/admin/logs/allVaultRewards.log
+touch /home/admin/logs/stakingStatus.log
 
 # New Relic Logging.d:
 echo "Section 2 of 3"
