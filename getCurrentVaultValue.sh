@@ -4,7 +4,7 @@
 #  confirmations > waitForConfirmations. If so, then it gets the current staked value, formats it,
 #  and outputs it to work with the New Relic integrations.d file: flexVaultCurrentValue.yml
 
-# Change this if the getcoinavailability command returns a number that is lower than it should be. You'll see this if
+# Increase this if the getcoinavailability command returns a number that is lower than it should be. You'll see this if
 #  the New Relic History chart has drops that spike down. This happens while the stake_reward or lottery is validated.
 #  Once validated, the correct number is returned. Each confirmation is about one minute.
 waitForConfirmations=20
