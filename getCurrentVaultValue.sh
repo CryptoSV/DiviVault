@@ -21,8 +21,8 @@ last_entry=${entries[$last_index]}
 # Extract confirmations from the last entry
 confirmations=$(echo "$last_entry" | jq -r '.confirmations')
 
-# Check if confirmations are greater than waitForConfirmations
-if (( confirmations > $waitForConfirmations )); then
+# Check if confirmations are greater than waitForConfirmations or if they are -1 (which means this was an orphan block)
+if (( confirmations > $waitForConfirmations )) || (( confirmations == -1 )); then
     # Run the command and capture the JSON output
     json_output=$(/home/admin/divi-3.0.0/bin/divi-cli getcoinavailability true)
 
