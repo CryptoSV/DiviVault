@@ -33,7 +33,7 @@ if [ ! -s "$log_file" ]; then
 fi
 
 # Get staking status
-readarray -t arr < <("$divi-cli" getstakingstatus | jq -r '.validtime, .haveconnections, .walletunlocked, .mintablecoins, .enoughcoins, .mnsync, ."staking status"')
+readarray -t arr < <("$divi_cli" getstakingstatus | jq -r '.validtime, .haveconnections, .walletunlocked, .mintablecoins, .enoughcoins, .mnsync, ."staking status"')
 
 # Check last log entry for "ERROR"
 last_row_contains_error=$(tail -n 1 $log_file | grep -q "ERROR"; echo $?)
