@@ -7,7 +7,7 @@ sns_arn="[Your SNS ARN]"  # Update this with your actual SNS ARN
 aws_region="[Your AWS Region]"  # Update this with your actual AWS region
 cryptoid_key="[Your CryptoID key]"  # Update with your Chainz CryptoID key
 
-divi_path="/home/admin/divi-3.0.0/bin"
+divi_cli="/home/admin/divi-3.0.0/bin/divi-cli"
 log_path="/home/admin/logs/allVaultRewards.log"
 price_url="https://chainz.cryptoid.info/divi/api.dws?key=${cryptoid_key}&q=ticker.usd"
 
@@ -46,7 +46,7 @@ get_number_suffix() {
 }
 
 # Main Process
-output=$("$divi_path/divi-cli" listtransactions)
+output=$("$divi_cli" listtransactions)
 
 # Parse each "stake_reward" entry, check confirmations and convert the time to the specified format
 while read -r line; do
