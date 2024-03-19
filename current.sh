@@ -5,6 +5,7 @@
 
 # Setup variables
 current_date=$(date)
+divi_cli="/home/admin/divi-3.0.0/bin/divi-cli"
 log_file="/home/admin/logs/stakingStatus.log"
 sns_arn="[Your SNS ARN]"  # Update this with your actual SNS ARN
 aws_region="[Your AWS Region]"  # Update this with your actual AWS region
@@ -32,7 +33,7 @@ if [ ! -s "$log_file" ]; then
 fi
 
 # Get staking status
-readarray -t arr < <(/home/admin/divi-3.0.0/bin/divi-cli getstakingstatus | jq -r '.validtime, .haveconnections, .walletunlocked, .mintablecoins, .enoughcoins, .mnsync, ."staking status"')
+readarray -t arr < <("$divi-cli" getstakingstatus | jq -r '.validtime, .haveconnections, .walletunlocked, .mintablecoins, .enoughcoins, .mnsync, ."staking status"')
 
 # Check last log entry for "ERROR"
 last_row_contains_error=$(tail -n 1 $log_file | grep -q "ERROR"; echo $?)
