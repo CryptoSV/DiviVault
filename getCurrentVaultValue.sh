@@ -9,10 +9,10 @@
 #  Once validated, the correct number is returned. Each confirmation is about one minute.
 waitForConfirmations=20
 
-divi_path="/home/admin/divi-3.0.0/bin"
+divi_cli="/home/admin/divi-3.0.0/bin/divi-cli"
 
 # Get JSON data from the listtransactions and load it into an array
-IFS=$'\n' read -r -d '' -a entries < <("$divi_path/divi-cli" listtransactions | jq -c '.[]' && printf '\0')
+IFS=$'\n' read -r -d '' -a entries < <("$divi_cli" listtransactions | jq -c '.[]' && printf '\0')
 
 # Get the index of the last element in the array
 last_index=$(( ${#entries[@]} - 1 ))
@@ -26,7 +26,7 @@ confirmations=$(echo "$last_entry" | jq -r '.confirmations')
 # Check if confirmations are greater than waitForConfirmations or if they are -1 (which means this was an orphan block)
 if (( confirmations > $waitForConfirmations )) || (( confirmations == -1 )); then
     # Run the command and capture the JSON output
-    json_output=$("$divi_path/divi-cli" getcoinavailability true)
+    json_output=$("$divi_cli" getcoinavailability true)
 
     # Extract the value using jq
     value=$(echo "$json_output" | jq -r '.Stakable.AllVaults[0].value')
