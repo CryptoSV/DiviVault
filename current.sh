@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# This script checks the staking status and, if not properly running, will send an AWS SNS notification.
-# It will also send an AWS SNS notification when the status is normal.
+# This script checks the staking status and, if not properly running, will send an Amazon SNS notification.
+# It will also send an Amazon SNS notification when the status is normal.
 
 # Setup variables
 current_date=$(date)
