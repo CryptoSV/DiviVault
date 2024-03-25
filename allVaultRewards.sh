@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script looks for new vault rewards and sends a notification to AWS SNS with all the details of the reward.
+# This script looks for new vault rewards and sends a notification to Amazon SNS with all the details of the reward.
 
 # Configuration Variables
 sns_arn="[Your SNS ARN]"  # Update this with your actual SNS ARN
@@ -21,7 +21,7 @@ fetch_current_price() {
     printf "%.6f\n" "$(curl -s "$price_url")"
 }
 
-# Publishes a message to AWS SNS
+# Publishes a message to Amazon SNS
 publish_to_sns() {
     local message=$1
     aws sns publish --topic-arn "$sns_arn" --message "$message" --region "$aws_region"
