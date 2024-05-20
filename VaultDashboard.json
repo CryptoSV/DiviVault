@@ -1,528 +1,537 @@
 {
-    "name": "Vault Dashboard",
-    "description": null,
-    "permissions": "PUBLIC_READ_WRITE",
-    "pages": [
-      {
-        "name": "Vault",
-        "description": null,
-        "widgets": [
-          {
-            "title": "Current",
-            "layout": {
-              "column": 1,
-              "row": 1,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.billboard"
-            },
-            "rawConfiguration": {
-              "facet": {
-                "showOtherSeries": false
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT latest(current) AS 'Staked' FROM VaultValueSample"
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": false
-              }
-            }
+  "name": "Vault Dashboard",
+  "description": null,
+  "permissions": "PUBLIC_READ_WRITE",
+  "pages": [
+    {
+      "name": "Vault",
+      "description": null,
+      "widgets": [
+        {
+          "title": "Current",
+          "layout": {
+            "column": 1,
+            "row": 1,
+            "width": 4,
+            "height": 3
           },
-          {
-            "title": "Rewards",
-            "layout": {
-              "column": 5,
-              "row": 1,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.billboard"
-            },
-            "rawConfiguration": {
-              "facet": {
-                "showOtherSeries": false
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT latest(totalrewards) as 'Total', latest(ninty) AS 'Last 90 days', latest(previousmonth) AS 'Last month', latest(currentmonth) AS 'This month', latest(yesterday) AS 'Yesterday - UTC', latest(today) AS 'Today - UTC', latest(twentyfour) AS '24hr window - UTC', latest(lastconfirmation) AS 'Confirmations', latest(hours) AS 'Hours', latest(minutes) AS 'Minutes' FROM CountRewardsSample"
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": false
-              }
-            }
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.billboard"
           },
-          {
-            "title": "Staking Status",
-            "layout": {
-              "column": 9,
-              "row": 1,
-              "width": 4,
-              "height": 3
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
             },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.billboard"
-            },
-            "rawConfiguration": {
-              "facet": {
-                "showOtherSeries": false
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT latest(stakingstatus) AS 'Staking status', latest(validtime) AS 'Valid time', latest(haveconnections) AS 'Have connections', latest(walletunlocked) AS 'Wallet unlocked', latest(mintablecoins) AS 'Mintable coins', latest(enoughcoins) AS 'Enough coins', latest(mnsync) AS 'mnsync' FROM StakeStatusSample"
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": true
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT latest(current) AS 'Staked' FROM VaultValueSample"
               }
-            }
-          },
-          {
-            "title": "History",
-            "layout": {
-              "column": 1,
-              "row": 4,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.line"
-            },
-            "rawConfiguration": {
-              "facet": {
-                "showOtherSeries": false
-              },
-              "legend": {
-                "enabled": true
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT latest(value) FROM VaultValueSample TIMESERIES MAX SINCE 1 week ago"
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": true
-              },
-              "yAxisLeft": {
-                "zero": false
-              }
-            }
-          },
-          {
-            "title": "Usage",
-            "layout": {
-              "column": 5,
-              "row": 4,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.billboard"
-            },
-            "rawConfiguration": {
-              "dataFormatters": [
-                {
-                  "name": "Disk %",
-                  "precision": 1,
-                  "type": "decimal"
-                },
-                {
-                  "name": "CPU %",
-                  "precision": 1,
-                  "type": "decimal"
-                },
-                {
-                  "name": "Memory %",
-                  "precision": 1,
-                  "type": "decimal"
-                }
-              ],
-              "facet": {
-                "showOtherSeries": false
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT average(host.cpuPercent) AS 'CPU %', average(host.memoryUsedPercent) AS 'Memory %', latest(host.disk.usedPercent) AS 'Disk %' FROM Metric FACET entity.name"
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": false
-              }
-            }
-          },
-          {
-            "title": "Last reward",
-            "layout": {
-              "column": 9,
-              "row": 4,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.billboard"
-            },
-            "rawConfiguration": {
-              "facet": {
-                "showOtherSeries": false
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT latest(month), latest(day), latest(hour), latest(minute) FROM Log WHERE filePath = '/home/admin/logs/allVaultRewards.log' SINCE 3 days ago"
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": false
-              }
-            }
-          },
-          {
-            "title": "Avg CPU Utilization %",
-            "layout": {
-              "column": 1,
-              "row": 7,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.line"
-            },
-            "rawConfiguration": {
-              "facet": {
-                "showOtherSeries": false
-              },
-              "legend": {
-                "enabled": true
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT average(cpuUserPercent) FROM SystemSample FACET entityName UNTIL 1 minute ago TIMESERIES AUTO "
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": false
-              },
-              "thresholds": {
-                "isLabelVisible": true
-              },
-              "yAxisLeft": {
-                "zero": true
-              },
-              "yAxisRight": {
-                "zero": true
-              }
-            }
-          },
-          {
-            "title": "Avg Mem Utilization %",
-            "layout": {
-              "column": 5,
-              "row": 7,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.line"
-            },
-            "rawConfiguration": {
-              "facet": {
-                "showOtherSeries": false
-              },
-              "legend": {
-                "enabled": true
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT average(memoryUsedPercent) FROM SystemSample FACET entityName UNTIL 1 minute ago TIMESERIES AUTO "
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": false
-              },
-              "thresholds": {
-                "isLabelVisible": true
-              },
-              "yAxisLeft": {
-                "zero": true
-              },
-              "yAxisRight": {
-                "zero": true
-              }
-            }
-          },
-          {
-            "title": "Avg Disk Utilization %",
-            "layout": {
-              "column": 9,
-              "row": 7,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.line"
-            },
-            "rawConfiguration": {
-              "facet": {
-                "showOtherSeries": false
-              },
-              "legend": {
-                "enabled": true
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT average(diskUtilizationPercent) FROM SystemSample FACET entityName UNTIL 1 minute ago TIMESERIES AUTO "
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": false
-              },
-              "thresholds": {
-                "isLabelVisible": true
-              },
-              "yAxisLeft": {
-                "zero": true
-              },
-              "yAxisRight": {
-                "zero": true
-              }
-            }
-          },
-          {
-            "title": "Network traffic",
-            "layout": {
-              "column": 1,
-              "row": 10,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.area"
-            },
-            "rawConfiguration": {
-              "facet": {
-                "showOtherSeries": false
-              },
-              "legend": {
-                "enabled": true
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT average(host.net.transmitBytesPerSecond) AS 'Transmit bytes per second', average(host.net.receiveBytesPerSecond) AS 'Receive bytes per second' FROM Metric FACET entity.name TIMESERIES auto"
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": false
-              }
-            }
-          },
-          {
-            "title": "Processes running",
-            "layout": {
-              "column": 5,
-              "row": 10,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.table"
-            },
-            "rawConfiguration": {
-              "dataFormatters": [
-                {
-                  "name": "Mem Vir",
-                  "type": "humanized"
-                },
-                {
-                  "name": "Mem Res",
-                  "type": "humanized"
-                }
-              ],
-              "facet": {
-                "showOtherSeries": false
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT latest(host.process.cpuPercent) as 'CPU %', latest(`host.process.memoryResidentSizeBytes`) as 'Mem Res', latest(`host.process.memoryVirtualSizeBytes`) AS 'Mem Vir' FROM Metric FACET processDisplayName AS 'Process' ORDER BY cpuPercent asc LIMIT 100"
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": false
-              }
-            }
-          },
-          {
-            "title": "Load average",
-            "layout": {
-              "column": 9,
-              "row": 10,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.line"
-            },
-            "rawConfiguration": {
-              "facet": {
-                "showOtherSeries": false
-              },
-              "legend": {
-                "enabled": true
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT average(host.loadAverageOneMinute) as '1 minute', average(host.loadAverageFiveMinute) AS '5 minutes', average(host.loadAverageFifteenMinute) AS '15 minutes' FROM Metric TIMESERIES auto"
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": false
-              },
-              "thresholds": {
-                "isLabelVisible": true
-              },
-              "yAxisLeft": {
-                "zero": true
-              },
-              "yAxisRight": {
-                "zero": true
-              }
-            }
-          },
-          {
-            "title": "Network in dropped (packets/s)",
-            "layout": {
-              "column": 1,
-              "row": 13,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.line"
-            },
-            "rawConfiguration": {
-              "facet": {
-                "showOtherSeries": false
-              },
-              "legend": {
-                "enabled": true
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT average(host.net.receiveDroppedPerSecond) FROM Metric TIMESERIES auto"
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": false
-              },
-              "thresholds": {
-                "isLabelVisible": true
-              },
-              "yAxisLeft": {
-                "zero": true
-              },
-              "yAxisRight": {
-                "zero": true
-              }
-            }
-          },
-          {
-            "title": "Network out dropped (packets/s)",
-            "layout": {
-              "column": 5,
-              "row": 13,
-              "width": 4,
-              "height": 3
-            },
-            "linkedEntityGuids": null,
-            "visualization": {
-              "id": "viz.line"
-            },
-            "rawConfiguration": {
-              "facet": {
-                "showOtherSeries": false
-              },
-              "legend": {
-                "enabled": true
-              },
-              "nrqlQueries": [
-                {
-                  "accountIds": [
-                    REPLACE-ID
-                  ],
-                  "query": "SELECT average(host.net.transmitDroppedPerSecond) FROM Metric TIMESERIES auto"
-                }
-              ],
-              "platformOptions": {
-                "ignoreTimeRange": false
-              },
-              "thresholds": {
-                "isLabelVisible": true
-              },
-              "yAxisLeft": {
-                "zero": true
-              },
-              "yAxisRight": {
-                "zero": true
-              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": false
             }
           }
-        ]
-      }
-    ],
-    "variables": []
-  }
+        },
+        {
+          "title": "Rewards",
+          "layout": {
+            "column": 5,
+            "row": 1,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.billboard"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT latest(totalrewards) as 'Total', latest(ninty) AS 'Last 90 days', latest(previousmonth) AS 'Last month', latest(currentmonth) AS 'This month', latest(yesterday) AS 'Yesterday - UTC', latest(today) AS 'Today - UTC', latest(twentyfour) AS '24hr window - UTC', latest(lastconfirmation) AS 'Confirmations', latest(hours) AS 'Hours', latest(minutes) AS 'Minutes' FROM CountRewardsSample"
+              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": false
+            }
+          }
+        },
+        {
+          "title": "Staking Status",
+          "layout": {
+            "column": 9,
+            "row": 1,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.billboard"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT latest(stakingstatus) AS 'Staking status', latest(validtime) AS 'Valid time', latest(haveconnections) AS 'Have connections', latest(walletunlocked) AS 'Wallet unlocked', latest(mintablecoins) AS 'Mintable coins', latest(enoughcoins) AS 'Enough coins', latest(mnsync) AS 'mnsync' FROM StakeStatusSample"
+              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": true
+            }
+          }
+        },
+        {
+          "title": "History",
+          "layout": {
+            "column": 1,
+            "row": 4,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT latest(value) FROM VaultValueSample TIMESERIES MAX SINCE 1 week ago"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": true
+            },
+            "thresholds": {
+              "isLabelVisible": true
+            },
+            "yAxisLeft": {
+              "zero": false
+            },
+            "yAxisRight": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Usage",
+          "layout": {
+            "column": 5,
+            "row": 4,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.billboard"
+          },
+          "rawConfiguration": {
+            "dataFormatters": [
+              {
+                "name": "Disk %",
+                "precision": 1,
+                "type": "decimal"
+              },
+              {
+                "name": "CPU %",
+                "precision": 1,
+                "type": "decimal"
+              },
+              {
+                "name": "Memory %",
+                "precision": 1,
+                "type": "decimal"
+              }
+            ],
+            "facet": {
+              "showOtherSeries": false
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT average(host.cpuPercent) AS 'CPU %', average(host.memoryUsedPercent) AS 'Memory %', latest(host.disk.usedPercent) AS 'Disk %' FROM Metric FACET entity.name"
+              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": false
+            }
+          }
+        },
+        {
+          "title": "Last reward - UTC",
+          "layout": {
+            "column": 9,
+            "row": 4,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.billboard"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT latest(month), latest(day), latest(hour), latest(minute) FROM Log WHERE filePath = '/home/admin/logs/allVaultRewards.log' SINCE 3 days ago"
+              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": false
+            }
+          }
+        },
+        {
+          "title": "Avg CPU Utilization %",
+          "layout": {
+            "column": 1,
+            "row": 7,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT average(cpuUserPercent) FROM SystemSample FACET entityName UNTIL 1 minute ago TIMESERIES AUTO "
+              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "thresholds": {
+              "isLabelVisible": true
+            },
+            "yAxisLeft": {
+              "zero": true
+            },
+            "yAxisRight": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Avg Mem Utilization %",
+          "layout": {
+            "column": 5,
+            "row": 7,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT average(memoryUsedPercent) FROM SystemSample FACET entityName UNTIL 1 minute ago TIMESERIES AUTO "
+              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "thresholds": {
+              "isLabelVisible": true
+            },
+            "yAxisLeft": {
+              "zero": true
+            },
+            "yAxisRight": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Avg Disk Utilization %",
+          "layout": {
+            "column": 9,
+            "row": 7,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT average(diskUtilizationPercent) FROM SystemSample FACET entityName UNTIL 1 minute ago TIMESERIES AUTO "
+              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "thresholds": {
+              "isLabelVisible": true
+            },
+            "yAxisLeft": {
+              "zero": true
+            },
+            "yAxisRight": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Network traffic",
+          "layout": {
+            "column": 1,
+            "row": 10,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.area"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT average(host.net.transmitBytesPerSecond) AS 'Transmit bytes per second', average(host.net.receiveBytesPerSecond) AS 'Receive bytes per second' FROM Metric FACET entity.name TIMESERIES auto"
+              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": false
+            }
+          }
+        },
+        {
+          "title": "Processes running",
+          "layout": {
+            "column": 5,
+            "row": 10,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.table"
+          },
+          "rawConfiguration": {
+            "dataFormatters": [
+              {
+                "name": "Mem Vir",
+                "type": "humanized"
+              },
+              {
+                "name": "Mem Res",
+                "type": "humanized"
+              }
+            ],
+            "facet": {
+              "showOtherSeries": false
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT latest(host.process.cpuPercent) as 'CPU %', latest(`host.process.memoryResidentSizeBytes`) as 'Mem Res', latest(`host.process.memoryVirtualSizeBytes`) AS 'Mem Vir' FROM Metric FACET processDisplayName AS 'Process' ORDER BY cpuPercent asc LIMIT 100"
+              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": false
+            }
+          }
+        },
+        {
+          "title": "Load average",
+          "layout": {
+            "column": 9,
+            "row": 10,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT average(host.loadAverageOneMinute) as '1 minute', average(host.loadAverageFiveMinute) AS '5 minutes', average(host.loadAverageFifteenMinute) AS '15 minutes' FROM Metric TIMESERIES auto"
+              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "thresholds": {
+              "isLabelVisible": true
+            },
+            "yAxisLeft": {
+              "zero": true
+            },
+            "yAxisRight": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Network in dropped (packets/s)",
+          "layout": {
+            "column": 1,
+            "row": 13,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT average(host.net.receiveDroppedPerSecond) FROM Metric TIMESERIES auto"
+              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "thresholds": {
+              "isLabelVisible": true
+            },
+            "yAxisLeft": {
+              "zero": true
+            },
+            "yAxisRight": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Network out dropped (packets/s)",
+          "layout": {
+            "column": 5,
+            "row": 13,
+            "width": 4,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [
+                  REPLACE-ID
+                ],
+                "query": "SELECT average(host.net.transmitDroppedPerSecond) FROM Metric TIMESERIES auto"
+              }
+            ],
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "thresholds": {
+              "isLabelVisible": true
+            },
+            "yAxisLeft": {
+              "zero": true
+            },
+            "yAxisRight": {
+              "zero": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variables": []
+}
