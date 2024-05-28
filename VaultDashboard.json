@@ -122,7 +122,13 @@
               }
             ],
             "nullValues": {
-              "nullValue": "remove"
+              "nullValue": "remove",
+              "seriesOverrides": [
+                {
+                  "nullValue": "remove",
+                  "seriesName": "Value"
+                }
+              ]
             },
             "platformOptions": {
               "ignoreTimeRange": true
