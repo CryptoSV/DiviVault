@@ -31,7 +31,7 @@ numRewards=$(wc -l "$log_file" | awk '{print $1}')
 
 # Extract month counts
 current_month=$(date +'%m')
-previous_month=$(date -d 'last month' +'%m')
+previous_month=$(date -d "$(date +%Y-%m-01) -1 day" +'%m')
 
 # Initialize associative array for monthly counts
 declare -A counts
