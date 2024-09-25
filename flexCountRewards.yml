@@ -4,6 +4,7 @@ integrations:
       name: DiviVaultRewards
       apis:
         - name: CountRewards
+          timeout: 15000
           integration_user: admin
           working_dir: /home/admin
           commands:
